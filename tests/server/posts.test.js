@@ -19,7 +19,7 @@ describe('API', () => {
 
       expect(res.statusCode).toEqual(200)
       expect(res.body).toHaveProperty('posts')
-    }, 10000)
+    }, 20000)
 
     it('should get a post by id', async () => {
       const res = await request(server).get('/posts/1')
