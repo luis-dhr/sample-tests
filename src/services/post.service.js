@@ -1,25 +1,46 @@
 const getPosts = async ({ axios }) => {
-  const { data } = await axios.get('/posts')
-  return data
+  try {
+    const { data } = await axios.get('/posts')
+    return data
+  } catch (error) {
+    return null
+  }
 }
 
 const getPostById = async ({ axios }, id) => {
-  const { data } = await axios.get(`/posts/${id}`)
-  return data
+  try {
+    const { data } = await axios.get(`/posts/${id}`)
+    return data
+  } catch (error) {
+    return null
+  }
 }
 
 const createPost = async ({ axios }, body) => {
-  const { data } = await axios.post('/posts', body)
-  return data
+  try {
+    const { data } = await axios.post('/posts', body)
+    return data
+  } catch (error) {
+    return null
+  }
 }
 
 const updatePost = async ({ axios }, id, body) => {
-  const { data } = await axios.put(`/posts/${id}`, body)
-  return data
+  try {
+    const { data } = await axios.put(`/posts/${id}`, body)
+    return data
+  } catch (error) {
+    return null
+  }
 }
 
 const deletePost = async ({ axios }, id) => {
-  await axios.delete(`/posts/${id}`)
+  try {
+    await axios.delete(`/posts/${id}`)
+    return true
+  } catch (error) {
+    return null
+  }
 }
 
 module.exports = {
