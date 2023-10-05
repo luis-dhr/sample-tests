@@ -5,7 +5,7 @@ jest.useFakeTimers()
 let server
 
 beforeEach(() => {
-  server = app.listen(3000)
+  server = app.listen(4000)
 })
 
 afterEach(() => {
