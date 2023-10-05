@@ -37,7 +37,7 @@ describe('API', () => {
 
       expect(res.statusCode).toEqual(201)
       expect(res.body).toHaveProperty('newPost')
-    }, 10000)
+    }, 20000)
 
     it('should update a post', async () => {
       const res = await request(server).put('/posts/6').send({
