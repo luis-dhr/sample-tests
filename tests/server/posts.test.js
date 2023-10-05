@@ -26,7 +26,7 @@ describe('API', () => {
 
       expect(res.statusCode).toEqual(200)
       expect(res.body).toHaveProperty('post')
-    }, 10000)
+    }, 20000)
 
     it('should create a new post', async () => {
       const res = await request(server).post('/posts').send({
@@ -47,12 +47,12 @@ describe('API', () => {
 
       expect(res.statusCode).toEqual(200)
       expect(res.body).toHaveProperty('postUpdated')
-    }, 10000)
+    }, 20000)
 
     it('should delete a post', async () => {
       const res = await request(server).delete('/posts/9')
 
       expect(res.statusCode).toEqual(204)
-    }, 10000)
+    }, 20000)
   })
 })

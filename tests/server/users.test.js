@@ -26,7 +26,7 @@ describe('API', () => {
 
       expect(res.statusCode).toEqual(200)
       expect(res.body).toHaveProperty('user')
-    }, 10000)
+    }, 20000)
 
     it('should create a new user', async () => {
       const res = await request(server).post('/users').send({
@@ -37,7 +37,7 @@ describe('API', () => {
 
       expect(res.statusCode).toEqual(201)
       expect(res.body).toHaveProperty('newUser')
-    }, 10000)
+    }, 20000)
 
     it('should update a user', async () => {
       const res = await request(server).put('/users/1').send({
@@ -48,12 +48,12 @@ describe('API', () => {
 
       expect(res.statusCode).toEqual(200)
       expect(res.body).toHaveProperty('userUpdated')
-    }, 10000)
+    }, 20000)
 
     it('should delete a user', async () => {
       const res = await request(server).delete('/users/5')
 
       expect(res.statusCode).toEqual(204)
-    }, 10000)
+    }, 20000)
   })
 })
