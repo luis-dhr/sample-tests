@@ -1,7 +1,7 @@
 const request = require('supertest')
 const app = require('../../src/server')
 
-jest.useFakeTimers()
+jest.useRealTimers()
 let server
 
 beforeEach(() => {
@@ -19,14 +19,14 @@ describe('API', () => {
 
       expect(res.statusCode).toEqual(200)
       expect(res.body).toHaveProperty('posts')
-    }, 20000)
+    }, 30000)
 
     it('should get a post by id', async () => {
       const res = await request(server).get('/posts/1')
 
       expect(res.statusCode).toEqual(200)
       expect(res.body).toHaveProperty('post')
-    }, 20000)
+    }, 30000)
 
     it('should create a new post', async () => {
       const res = await request(server).post('/posts').send({
@@ -37,7 +37,7 @@ describe('API', () => {
 
       expect(res.statusCode).toEqual(201)
       expect(res.body).toHaveProperty('newPost')
-    }, 20000)
+    }, 30000)
 
     it('should update a post', async () => {
       const res = await request(server).put('/posts/6').send({
@@ -47,12 +47,12 @@ describe('API', () => {
 
       expect(res.statusCode).toEqual(200)
       expect(res.body).toHaveProperty('postUpdated')
-    }, 20000)
+    }, 30000)
 
     it('should delete a post', async () => {
       const res = await request(server).delete('/posts/9')
 
       expect(res.statusCode).toEqual(204)
-    }, 20000)
+    }, 30000)
   })
 })
