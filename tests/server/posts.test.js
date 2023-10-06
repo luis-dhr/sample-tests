@@ -15,7 +15,7 @@ afterAll(() => {
 describe('API', () => {
   describe('Posts', () => {
     it('should get a post by id', async () => {
-      const res = await request(server).get('/posts/1')
+      const res = await request(server).get('/posts/4')
 
       expect(res.statusCode).toEqual(200)
       expect(res.body).toHaveProperty('post')

@@ -15,7 +15,7 @@ afterAll(() => {
 describe('API', () => {
   describe('Users', () => {
     it('should get a user by id', async () => {
-      const res = await request(server).get('/users/1')
+      const res = await request(server).get('/users/5')
 
       expect(res.statusCode).toEqual(200)
       expect(res.body).toHaveProperty('user')

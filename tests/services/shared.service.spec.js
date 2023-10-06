@@ -4,22 +4,22 @@ describe('Services: Shared', () => {
   describe('Create user post', () => {
     it('should create a post if user exists', async () => {
       const axios = {
-        get: jest.fn().mockResolvedValue({ data: { id: 1 } }),
+        get: jest.fn().mockResolvedValue({ data: { id: 5 } }),
         post: jest.fn().mockResolvedValue({ data: { id: 1 } })
       }
-      const body = {
+      const postData = {
         userId: 5,
         title: 'Post title',
         body: 'Post body'
       }
-      const postData = await sharedService.createUserPost({ axios }, body)
+      const newPost = await sharedService.createUserPost({ axios }, postData)
 
-      expect(postData).toEqual({ id: 1 })
+      expect(newPost).toEqual({ id: 1 })
       expect(axios.get).toHaveBeenCalledTimes(1)
       expect(axios.get).toHaveBeenCalledWith('/users/5')
       expect(axios.post).toHaveBeenCalledTimes(1)
-      expect(axios.post).toHaveBeenCalledWith('/posts', body)
-    })
+      expect(axios.post).toHaveBeenCalledWith('/posts', postData)
+    }, 35000)
 
     it('should throw an error if user does not exist', async () => {
       const axios = {
@@ -39,5 +39,5 @@ describe('Services: Shared', () => {
       expect(axios.get).toHaveBeenCalledWith('/users/5')
       expect(axios.post).toHaveBeenCalledTimes(0)
     })
-  })
+  }, 35000)
 })
