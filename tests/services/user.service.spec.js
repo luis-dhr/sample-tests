@@ -1,6 +1,25 @@
 const { userService } = require('../../src/services')
 
 describe('Services: User', () => {
+  describe('get by id', () => {
+    it('should return a user', async () => {
+      const user = {
+        id: 1,
+        name: 'John Doe',
+        username: 'john.doe'
+      }
+      const axios = {
+        get: jest.fn().mockResolvedValue({ data: user })
+      }
+      const userId = 1
+      const userData = await userService.getUserById({ axios }, userId)
+
+      expect(userData).toEqual(user)
+      expect(axios.get).toHaveBeenCalledTimes(1)
+      expect(axios.get).toHaveBeenCalledWith(`/users/${userId}`)
+    })
+  })
+
   describe('get', () => {
     it('should return a list of users', async () => {
       const users = [
@@ -18,25 +37,6 @@ describe('Services: User', () => {
       expect(usersData).toEqual(users)
       expect(axios.get).toHaveBeenCalledTimes(1)
       expect(axios.get).toHaveBeenCalledWith('/users')
-    })
-  })
-
-  describe('get by id', () => {
-    it('should return a user', async () => {
-      const user = {
-        id: 1,
-        name: 'John Doe',
-        username: 'john.doe'
-      }
-      const axios = {
-        get: jest.fn().mockResolvedValue({ data: user })
-      }
-      const userId = 1
-      const userData = await userService.getUserById({ axios }, userId)
-
-      expect(userData).toEqual(user)
-      expect(axios.get).toHaveBeenCalledTimes(1)
-      expect(axios.get).toHaveBeenCalledWith(`/users/${userId}`)
     })
   })
 

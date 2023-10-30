@@ -24,19 +24,22 @@ describe('Services: Post', () => {
   describe('get by id', () => {
     it('should return a post', async () => {
       const post = {
-        id: 1,
+        postID: 1,
         title: 'Post title',
         body: 'Post body'
       }
-      const axios = {
-        get: jest.fn().mockResolvedValue({ data: post })
+      const db = {
+        collection: jest.fn().mockReturnThis(),
+        findOne: jest.fn().mockResolvedValue(post)
       }
       const postId = 1
-      const postData = await postService.getPostById({ axios }, postId)
+      const postData = await postService.getPostById(db, postId)
 
       expect(postData).toEqual(post)
-      expect(axios.get).toHaveBeenCalledTimes(1)
-      expect(axios.get).toHaveBeenCalledWith(`/posts/${postId}`)
+      expect(db.collection).toHaveBeenCalledTimes(1)
+      expect(db.collection).toHaveBeenCalledWith('posts')
+      expect(db.findOne).toHaveBeenCalledTimes(1)
+      expect(db.findOne).toHaveBeenCalledWith({ postID: postId })
     })
   })
 

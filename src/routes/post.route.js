@@ -1,8 +1,20 @@
 const express = require('express')
 const libraries = require('../libraries')
+const { getDB } = require('../libraries/mongodb')
 const { postService, sharedService } = require('../services')
 
 const router = express.Router()
+
+router.get('/:id', async (req, res) => {
+  const db = getDB()
+  const post = await postService.getPostById(db, req.params.id)
+
+  if (post === null) {
+    return res.status(404).send({ message: 'Post not found' })
+  }
+
+  res.status(200).send({ post })
+})
 
 router.get('/', async (_req, res) => {
   const posts = await postService.getPosts(libraries)
@@ -12,16 +24,6 @@ router.get('/', async (_req, res) => {
   }
 
   res.status(200).send({ posts })
-})
-
-router.get('/:id', async (req, res) => {
-  const post = await postService.getPostById(libraries, req.params.id)
-
-  if (post === null) {
-    return res.status(404).send({ message: 'Post not found' })
-  }
-
-  res.status(200).send({ post })
 })
 
 router.post('/', async (req, res) => {

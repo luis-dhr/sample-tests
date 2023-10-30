@@ -7,9 +7,13 @@ const getPosts = async ({ axios }) => {
   }
 }
 
-const getPostById = async ({ axios }, id) => {
+const getPostById = async (db, id) => {
   try {
-    const { data } = await axios.get(`/posts/${id}`)
+    const collection = db.collection('posts')
+
+    const postID = parseInt(id, 10)
+    const data = await collection.findOne({ postID })
+
     return data
   } catch (error) {
     return null

@@ -1,15 +1,15 @@
-const getUsers = async ({ axios }) => {
+const getUserById = async ({ axios }, id) => {
   try {
-    const { data } = await axios.get('/users')
+    const { data } = await axios.get(`/users/${id}`)
     return data
   } catch (error) {
     return null
   }
 }
 
-const getUserById = async ({ axios }, id) => {
+const getUsers = async ({ axios }) => {
   try {
-    const { data } = await axios.get(`/users/${id}`)
+    const { data } = await axios.get('/users')
     return data
   } catch (error) {
     return null
